@@ -1,0 +1,723 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Desafio M05 - SMARTCODE",
+    "description": "API para um PDV (Frente de Caixa)",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de test"
+    },
+    {
+      "url": "https://desafio-backend-final-dds-t16.onrender.com",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/usuario": {
+      "post": {
+        "description": "Essa rota será responsável por cadastrar novo usuário.",
+        "summary": "Cadastrar Usuário",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nome": "Test1",
+                  "email": "test1@email.com",
+                  "senha": "12345678"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Essa rota será responsável por detalhar usuário logado.",
+        "summary": "Detalhar Perfil Logado",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Essa rota será responsável por editar usuário logado.",
+        "summary": "Editar Perfil Logado",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "nome": "Jonathan",
+                  "email": "jonathan@email.com",
+                  "senha": "12345678"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/categoria": {
+      "get": {
+        "description": "Essa rota será responsável por listar as categorias.",
+        "summary": "Listar Categorias",
+        "tags": ["Categoria"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "Essa rota será responsável por logar o usuário.",
+        "summary": "Login Usuário",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jonathan@email.com",
+                  "senha": "12345678"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produto": {
+      "post": {
+        "description": "Essa rota será responsável por cadastrar novo produto.",
+        "summary": "Cadastrar Produto",
+        "tags": ["Produto"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "descricao": "Mouse Gamer",
+                  "quantidade_estoque": 1,
+                  "valor": 10000,
+                  "categoria_id": 1
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável listar todos os produtos.",
+        "summary": "Listar produtos",
+        "tags": ["Produto"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/produto/{id}": {
+      "put": {
+        "description": "Essa rota será responsável por editar produto.",
+        "summary": "Editar Produto",
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "descricao": "produto",
+                  "quantidade_estoque": 2,
+                  "valor": 10000,
+                  "categoria_id": 1
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável por detalhar produto por id.",
+        "summary": "Detalhar Produto por Id",
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Essa rota será responsável por deletar produto.",
+        "summary": "Deletar Produto",
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/produto/{id}/imagem": {
+      "patch": {
+        "description": "Essa rota será responsável por fazer upload de imagem do produto.",
+        "summary": "Upload de imagem",
+        "tags": ["Produto"],
+        "parameters": [{
+          "name": "id",
+          "description": "",
+          "in": "path",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "example": "1"
+        }],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imagem": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Arquivo de imagem"
+                  }
+                },
+                "required": ["imagem"]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/pedido": {
+      "post": {
+        "description": "Essa rota será responsável cadastrar um novo pedido.",
+        "summary": "Cadastrar Pedido",
+        "tags": ["Pedido"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "cliente_id": 1,
+                  "observacao": "Entragar no vizinho ao lado",
+                  "pedido_produtos": [
+                    {
+                      "produto_id": 5,
+                      "quantidade_produto": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável por listar os pedidos.",
+        "summary": "Listar Pedidos",
+        "tags": ["Pedido"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/cliente": {
+      "post": {
+        "description": "Essa rota será responsável cadastrar um novo cliente.",
+        "summary": "Cadastrar Cliente",
+        "tags": ["Cliente"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "nome": "João",
+                  "email": "joao@email.com",
+                  "cpf": "990.801.660-14",
+                  "rua": "Rua A",
+                  "numero": "1",
+                  "bairro": "Bangu",
+                  "cidade": "Rio de Janeiro",
+                  "estado": "RJ"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável listar clientes.",
+        "summary": "Listar Clientes",
+        "tags": ["Cliente"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/cliente/{id}": {
+      "put": {
+        "description": "Essa rota será responsável Editar os dados do cliente.",
+        "summary": "Editar Dados Cliente",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "nome": "Jonathan",
+                  "email": "jonathansilva@email.com",
+                  "cpf": "13897930790"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável detalhar cliente.",
+        "summary": "Detalhar Cliente",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/usuario/redefinir": {
+      "patch": {
+        "description": "Essa rota será responsável por redefinir a senha do usuario.",
+        "summary": "Redefinir Senha",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "authorization failed"
+          },
+          "422": {
+            "description": "validation failed"
+          },
+          "500": {
+            "description": "unknown server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jonathansilva@email.com",
+                  "senha_antiga": "12345678",
+                  "senha_nova": "123456789"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "tags": ["Categoria", "Cliente", "Pedido", "Produto", "Usuario"],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
